@@ -1,4 +1,5 @@
-# adminpy3
+# adminpy3 เวอร์ชั่น2 เอาไปลองใช้ สนใจเวอร์ชั่น3 เวอร์ชั่น4
+# โทรมาได้ที่ 0946345913 หรือที่ไอดีไลน์ sanuri5
 1. apt update
 2. apt upgrade
 3. pkg install python3
