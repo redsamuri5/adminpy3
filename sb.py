@@ -141,7 +141,6 @@ settings = {
 🎋(สนใจรีบโทร📲0946345913📞)
 📌หรือจิ้มที่นี่👇👇👇👇👇
 https://line.me/ti/p/samuri5
-https://line.me/ti/p/redsamuri7
 คุณจะได้เป็นเจ้าของ เซลบอทคุณภาพดีก่อนใครๆ
 (ทักก่อนจิ้ม...ไม่งั้นโดนออโต้บล็อคนะจ๊ะ)
 selfbot by:
@@ -163,21 +162,9 @@ selfbot by:
 แล้วค่อยมาคุยกันถึงรายระเอียดของสินค้า
 อยากได้เสปกแบบใหนราคาเท่าไหร่..เรามีหมด
 ทักมาได้ที่  👇👇👇👇👇👇👇👇👇
-1.
-2.
-3.
-4.
-5.
+- https://line.me/ti/p/samuri5
 หรือโทรมาได้ที่เบอร์นี้👇👇👇👇👇👇
-1.
-2.
-3.
-4.
-5.
-👕
-👖📦หรือสนใจติดต่อฝากขายสินค้า
-📦ติดต่อทีมงานข้างบนนี้ได้เลยนะคับ
-📝📝📝📝📝📝📝📝📝📝📝📝
+- 094 634 5913
 ขอแสดงความนับถือ
 จากทีมงาน SAMURAI ทุกคน""",
 
@@ -4499,32 +4486,7 @@ def lineBot(op):
                                           sendMessageWithMention(to, contact.mid)
                                           sendMessageWithMention(to, contact.mid)
                                           sendMessageWithMention(to, contact.mid)
-                                          break  
-        if op.type == 65:
-           print ("[ 65 ] NOTIFIED DESTROY MESSAGE")
-           if settings["unsendMessage"] == True:
-               try:
-                   at = op.param1
-                   msg_id = op.param2
-                   if msg_id in msg_dict:
-                       if msg_dict[msg_id]["from"]:
-                           contact = linegetContact(msg_dict[msg_id]["from"])
-                           if contact.displayNameOverridden != None:
-                               name_ = contact.displayNameOverridden
-                           else:
-                               name_ = contact.displayName
-                               ret_ = "Send Message cancelled."
-                               ret_ += "\nSender : @!"
-                               ret_ += "\nSend At : {}".format(str(dt_to_str(cTime_to_datetime(msg_dict[msg_id]["createdTime"]))))
-                               ret_ += "\nType : {}".format(str(Type._VALUES_TO_NAMES[msg_dict[msg_id]["contentType"]]))
-                               ret_ += "\nText : {}".format(str(msg_dict[msg_id]["text"]))
-                               line.sendMessage(at, str(ret_), [contact.mid])
-                           del msg_dict[msg_id]
-                       else:
-                           line.sendMessage(at,"SentMessage cancelled,But I didn't have log data.\nSorry > <")
-               except Exception as error:
-                   logError(error)
-                   traceback.print_tb(error.__traceback__)
+                                          break
       
         if op.type == 17:
            print ("MEMBER JOIN TO GROUP")
