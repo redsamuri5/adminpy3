@@ -61,6 +61,56 @@ class Talk(object):
         return self.talk.getLastOpRevision()
 
     """Message"""
+    
+    @loggedIn
+    def sendFooter(self, to, text, link, icon, footer):
+        contentMetadata = {'AGENT_LINK': link, 'AGENT_ICON': icon, 'AGENT_NAME': footer}
+        return self.sendMessage(to, text, contentMetadata)
+        
+    @loggedIn
+    def sendMentionFooter(self, to, text, mid, link, icon, footer):
+        arr = []
+        list_text=''
+        list_text+=' @dzin '
+        text=text+list_text
+        name='@dzin '
+        ln_text=text.replace('\n',' ')
+        if ln_text.find(name):
+            line_s=int(ln_text.index(name))
+            line_e=(int(line_s)+int(len(name)))
+        arrData={'S': str(line_s), 'E': str(line_e), 'M': mid}
+        arr.append(arrData)
+        contentMetadata={'AGENT_LINK': link, 'AGENT_ICON': icon, 'AGENT_NAME': footer,'MENTION':str('{"MENTIONEES":' + json.dumps(arr).replace(' ','') + '}')}
+        return self.sendMessage(to, text, contentMetadata)
+    
+    @loggedIn
+    def sendMention(self,to, text="",ps='', mids=[]):
+        arrData = ""
+        arr = []
+        mention = "@dzinzhgans__ "
+        if mids == []:
+            raise Exception("Invalid mids")
+        if "@!" in text:
+            if text.count("@!") != len(mids):
+                raise Exception("Invalid mids")
+            texts = text.split("@!")
+            textx = ps
+            for mid in mids:
+                textx += str(texts[mids.index(mid)])
+                slen = len(textx)
+                elen = len(textx) + 18
+                arrData = {'S':str(slen), 'E':str(elen - 4), 'M':mid}
+                arr.append(arrData)
+                textx += mention
+            textx += str(texts[len(mids)])
+        else:
+            textx = ps
+            slen = len(textx)
+            elen = len(textx) + 18
+            arrData = {'S':str(slen), 'E':str(elen - 4), 'M':mids[0]}
+            arr.append(arrData)
+            textx += mention + str(text)
+        return self.sendMessage(to, textx, {'MENTION': str('{"MENTIONEES":' + json.dumps(arr) + '}')}, 0)
 
     @loggedIn
     def sendMessage(self, to, text, contentMetadata={}, contentType=0):
@@ -79,6 +129,38 @@ class Talk(object):
         @dataMid List of user Mid
     """
     
+    @loggedIn
+    def sendMessageWithMention(self, to, text='', dataMid=[]):
+        arr = []
+        list_text=''
+        if '[list]' in text.lower():
+            i=0
+            for l in dataMid:
+                list_text+='\n@[list-'+str(i)+']'
+                i=i+1
+            text=text.replace('[list]', list_text)
+        elif '[list-' in text.lower():
+            text=text
+        else:
+            i=0
+            for l in dataMid:
+                list_text+=' @[list-'+str(i)+']'
+                i=i+1
+            text=text+list_text
+        i=0
+        for l in dataMid:
+            mid=l
+            name='@[list-'+str(i)+']'
+            ln_text=text.replace('\n',' ')
+            if ln_text.find(name):
+                line_s=int(ln_text.index(name))
+                line_e=(int(line_s)+int(len(name)))
+            arrData={'S': str(line_s), 'E': str(line_e), 'M': mid}
+            arr.append(arrData)
+            i=i+1
+        contentMetadata={'MENTION':str('{"MENTIONEES":' + json.dumps(arr).replace(' ','') + '}')}
+        return self.sendMessage(to, text, contentMetadata)
+
     @loggedIn
     def sendText(self, Tomid, text):
         msg = Message()
@@ -237,7 +319,23 @@ class Talk(object):
     def sendFileWithURL(self, to, url, fileName=''):
         path = self.downloadFileURL(url, 'path')
         return self.sendFile(to, path, fileName)
-
+        
+    @loggedIn
+    def sendMentionFooter(self, to, text, mid, link, icon, footer):
+        arr = []
+        list_text=''
+        list_text+=' @dzin '
+        text=text+list_text
+        name='@dzin '
+        ln_text=text.replace('\n',' ')
+        if ln_text.find(name):
+            line_s=int(ln_text.index(name))
+            line_e=(int(line_s)+int(len(name)))
+        arrData={'S': str(line_s), 'E': str(line_e), 'M': mid}
+        arr.append(arrData)
+        contentMetadata={'AGENT_LINK': link, 'AGENT_ICON': icon, 'AGENT_NAME': footer,'MENTION':str('{"MENTIONEES":' + json.dumps(arr).replace(' ','') + '}')}
+        return self.sendMessage(to, text, contentMetadata)
+        
     """Contact"""
         
     @loggedIn
