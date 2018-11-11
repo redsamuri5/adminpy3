@@ -35,8 +35,8 @@ Exc = [line]
 lineMID = line.getProfile().mid
 bot1 = line.getProfile().mid
 RfuBot=[lineMID]
-Family=["ub5abe828cd964292195c3c59d6322033",lineMID]
-admin=['ub5abe828cd964292195c3c59d6322033',lineMID]
+Family=[lineMID]
+admin=[lineMID]
 RfuFamily = RfuBot + Family
 
 protectname = []
@@ -50,18 +50,18 @@ targets = []
 msg_dict = {}
 
 settings = {
-    "autoAdd": False,
+    "autoBlock": True,
     "autoJoin": True,
-    'autoCancel':{"on":True,"members":10},	
+    'autoCancel':{"on":True,"members":100},	
     "autoLeave": True,
     "autoRead": False,
-    "leaveRoom": False,
-    "detectMention": True,
+    "leaveRoom": True,
+    "detectMention": False,
     "checkSticker": False,
     "checkContact": False,
     "checkPost": False,
     "kickMention": False,
-    "potoMention": True,
+    "potoMention": False,
     "delayMention": False,
     "lang":"JP",
     "Wc": False,
