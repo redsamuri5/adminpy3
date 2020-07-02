@@ -27,14 +27,14 @@ class Config(object):
         'LINE_SERVICES': '1459630796'
     }
 
-    APP_TYPE    = "CHROMEOS\t2.1.0\tCHROMEOS\t10.0.0"
-    APP_VER     = '8.9.1'
+    APP_TYPE    = "IOSIPAD 8.10.1 iPhone OS 11.2"
+    APP_VER     = '8.4.1'
     CARRIER     = '51089, 1-0'
     SYSTEM_NAME = 'RED SAMURAI'
-    SYSTEM_VER  = '10.12.0'
+    SYSTEM_VER  = '8.22.17'
     IP_ADDR     = '8.8.8.8'
     EMAIL_REGEX = re.compile(r"[^@]+@[^@]+\.[^@]+")
 
     def __init__(self):
-        self.APP_NAME = 'CHROMEOS\t2.1.0\tCHROMEOS\t10.0.0'
+        self.APP_NAME = 'IOSIPAD 8.10.1 iPhone OS 11.2'
         self.USER_AGENT = 'Line/%s' % self.APP_VER
